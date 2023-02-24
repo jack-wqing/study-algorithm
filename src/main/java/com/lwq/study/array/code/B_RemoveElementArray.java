@@ -15,6 +15,12 @@ public class B_RemoveElementArray {
             System.out.print(ele + ",");
         }
         System.out.println();
+        System.out.println("------------------------------");
+        int[] nums2 = new int[]{1, 2, 2, 4, 7, 6, 6, 10, 3};
+        System.out.print("长度为：" + solution2(nums2, 2) + "元素详情为:");
+        for (int ele : nums2) {
+            System.out.print(ele + ",");
+        }
 
     }
 
@@ -49,6 +55,30 @@ public class B_RemoveElementArray {
             }
         }
         return slowIndex;
+    }
+
+    /**
+     * 二指针删除数组元素，使用双向元素，减少复制次数
+     */
+    public static int solution2(int[] nums, int target){
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right){
+            //找左边第一个等于target的元素
+            while (left <= right && nums[left] != target){
+                left++;
+            }
+            //找右边第一个不等与target的元素
+            while (right >= left && nums[right] == target){
+                right --;
+            }
+            if(left <= right){
+                nums[left] = nums[right];
+                right--;
+            }
+        }
+        return left;
     }
 
 }
